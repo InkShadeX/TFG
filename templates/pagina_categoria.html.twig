@@ -1,0 +1,24 @@
+{% include 'cabecera.html.twig' %}
+
+{% block title %}Categoría: {{ categoria.nombreCategoria }}{% endblock %}
+
+{% block content %}
+    <div class="categoria-detalle">
+        <h1>{{ categoria.nombreCategoria }}</h1>
+
+        <h2>Productos:</h2>
+        <ul>
+            {% for producto in productos %}
+                <li>
+                    <a href="{{ path('producto_detalle', { 'id': producto.id_producto }) }}">
+                        {{ producto.nombre_producto }}
+                    </a>
+                    - {{ producto.precio }} EUR
+                </li>
+            {% else %}
+                <li>No hay productos en esta categoría.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+

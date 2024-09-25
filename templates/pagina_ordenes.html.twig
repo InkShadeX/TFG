@@ -1,0 +1,30 @@
+{% include 'cabecera.html.twig' %}
+
+{% block title %}Carrito{% endblock %}
+
+{% block content %}
+    <h1>Carrito de Compras</h1>
+
+    {% if productos is empty %}
+        <p>Tu carrito está vacío.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, producto in productos %}
+                    <tr>
+                        <td>{{ producto.producto }}</td>
+                        <td>{{ producto.cantidad }}</td>
+                        <td>{{ producto.precio }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

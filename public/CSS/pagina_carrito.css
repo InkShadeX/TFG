@@ -1,0 +1,97 @@
+/* Estilos para los fonts */
+h1 {
+    font-family: "Righteous", sans-serif;
+    font-style: normal;
+    margin-left: 3rem;
+    margin-top: 3rem;
+}
+
+/* Estilos para los botones */
+button {
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 400px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 15%;
+  margin-left: 3rem;
+}
+
+button:hover,
+button:focus {
+  opacity: .75;
+}
+
+
+
+/* Estilos para la tabla */
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: 3rem;
+}
+
+.styled-table thead tr {
+    background-color: #333;
+    color: #ffffff;
+    text-align: center;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #333;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilos para la tabla, sin aplicar a la última columna (boton-columna) */
+.styled-table tbody tr td {
+    padding: 12px 15px;
+}
+
+/* Eliminar los estilos de las celdas que contienen los botones */
+.boton_columna {
+    border: none;
+    padding: 0; /* Para eliminar cualquier espacio de padding que agregue la tabla */
+}
+
+.eliminar_orden {
+    background-color: rgb(255, 0, 0);
+}
