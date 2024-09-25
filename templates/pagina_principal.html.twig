@@ -1,0 +1,22 @@
+{% include 'cabecera.html.twig' %}
+
+{% block title %}Página Principal{% endblock %}
+
+{% block css %}
+    <!-- Estilos específicos de la página principal -->
+    <link rel="stylesheet" href="{{ asset('css/pagina_principal.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="categorias">
+    {% for categoria in categorias %}
+    <div class="categoria">
+        <a href="{{ path('categoria', {'idCategoria': categoria.idCategoria}) }}">
+            <img src="{{ asset('images/' ~ categoria.imagenCategoria) }}" alt="{{ categoria.nombreCategoria }}">
+            <h2>{{ categoria.nombreCategoria }}</h2>
+        </a>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

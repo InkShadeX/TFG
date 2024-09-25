@@ -1,0 +1,57 @@
+{% include 'cabecera.html.twig' %}
+
+{% block title %}Mi Tienda{% endblock %}
+
+{% block css %}
+    <!-- Estilos específicos de la página -->
+    <link rel="stylesheet" href="{{ asset('css/estilos_comunes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pagina_carrito.css') }}">
+
+    {# Fonts #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1>Tu carrito:</h1>
+    <form action = "{{ path('procesar_comprar_todo') }}" method = "post">
+        <input type="hidden" name="id_usuario" value="{{ id_usuario }}">
+        <button type="submit" class="comprar_todo">Comprar todo</button>
+    </form>
+    <div class="zona-carrito">
+        <table class = "styled-table">
+            <thead>
+                <tr>
+                    <td><strong>Número de orden</strong></td>
+                    <td><strong>Producto</strong></td>
+                    <td><strong>Cantidad</strong></td>
+                    <td><strong>Comprar por separado</strong></td>
+                    <td><strong>Borrar orden</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for orden in carrito %}
+                    <tr>
+                        <td>{{ orden.id_orden }}</td>
+                        <td>{{ orden.producto.nombre_producto }}</td>
+                        <td>{{ orden.cantidad }}</td>
+                        <td class="seccion_comprar_separado">
+                            <form action = "{{ path('procesar_comprar_separado') }}" method = "post">
+                                <input type="hidden" name="id_usuario" value="{{ orden.usuario }}">
+                                <input type="hidden" name="id_orden" value="{{ orden.id_orden }}">
+                                <button type="submit" class="comprar_separado">Comprar</button>
+                            </form>
+                        </td>
+                        <td class="seccion_eliminar_orden">
+                            <form action = "{{ path('procesar_eliminacion') }}" method = "post">
+                                <input type="hidden" name="id_orden" value="{{ orden.id_orden }}">
+                                <button type="submit" class="eliminar_orden" onclick="return confirm ('¿Estás seguro de querer eliminar esta orden?');">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+.producto-detalle {
+    text-align: center; /* Opcional: centra el contenido */
+}
+
+.producto-imagen-container {
+    max-width: 300px; /* Ajusta el ancho máximo del contenedor */
+    margin: 0 auto;   /* Centra el contenedor si es necesario */
+}
+
+.producto-imagen {
+    width: 100%;      /* Hace que la imagen ocupe todo el ancho del contenedor */
+    height: auto;     /* Mantiene la proporción de la imagen */
+}

@@ -1,0 +1,142 @@
+{% include 'cabecera.html.twig' %}
+
+{% block title %}Usuario{% endblock %}
+
+{% block css %}
+    <!-- Estilos específicos de la página principal -->
+    <link rel="stylesheet" href="{{ asset('css/pagina_usuario.css') }}">
+
+    {# Fonts #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="categorias">
+    <h1>¡Bienvenido de nuevo, {{ app.user.getNombreUsuario() }}!</h1>
+    <div class="main_div div_editar_usuario">
+        <h2><strong>Editar tu usuario</strong></h2>
+        <button class="button-58" id="boton_editar">Editar</button>
+        <div class="formulario_editar_usuario hidden" id="formulario_editar">
+            <h3>Edita aquí tu información:</h3>
+                <form action="{{ path('procesar_editar_usuario') }}" method="post"><table class="tabla_editar_usuario">
+                    <tr>
+                        <td><label for="nombre">Nombre:</label></td>
+                        <td><input type="text" name="nombre" class="input_texto calido"></td>
+                        <td><label for="apellidos">Apellidos:</label></td>
+                        <td><input type="text" name="apellidos" class="input_texto calido"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email:</label></td>
+                        <td colspan="3"><input type="text" id="email" name="email" class="input_texto calido"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="direccion">Dirección:</label></td>
+                        <td colspan="3"><input type="text" name="direccion" class="input_texto calido"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="contrasena">Contraseña:</label></td>
+                        <td><input type="password" name="contrasena" id="contrasena" class="input_texto calido"></td>
+                        <td><label for="confirmar_contrasena">Confirmar contraseña:</label></td>
+                        <td><input type="password" name="confirmar_contrasena" id="confirmar_contrasena" class="input_texto calido"></td>
+                    </tr>
+                    <tr><td colspan="2"><input type="checkbox" id="mostrar_contrasena">Mostrar contraseña</td></tr>
+                    <tr><td colspan="4"><button type="submit" class="button-58" id="enviar_editar" onclick="return confirm ('¿Estás seguro de que quieres continuar?');">Guardar cambios</button></td></tr>
+                </table></form>
+            </div>
+    </div>
+    <div class="main_div div_productos_comprados">
+        <h2><strong>Tienes un total de: {{ total_productos }} comprados actualmente</strong></h2>
+        <form method="post" action="{{ path('carrito') }}">
+            <button type="submit" class="button-58">Ver tu carrito</button>
+        </form>
+        <button type="submit" class="button-58" id="mostrar_compras">Ver tus compras</button>
+        <div class="compras_efectuadas hidden">
+            <table class = "styled-table">
+            <thead>
+                <tr>
+                    <td><strong>Número de orden</strong></td>
+                    <td><strong>Producto</strong></td>
+                    <td><strong>Cantidad</strong></td>
+                    <td><strong>Cancelar pedido</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for orden in pedidos %}
+                    <tr>
+                        <td>{{ orden.id_orden }}</td>
+                        <td>{{ orden.producto.nombre_producto }}</td>
+                        <td>{{ orden.cantidad }}</td>
+                        <td class="seccion_comprar_separado">
+                            <form action = "{{ path('procesar_cancelacion') }}" method = "post">
+                                <input type="hidden" name="id_usuario" value="{{ orden.usuario }}">
+                                <input type="hidden" name="id_orden" value="{{ orden.id_orden }}">
+                                <button type="submit" class="cancelar_pedido">Cancelar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="main_div div_administrar_tarjetas">
+        <h2><strong>Administrar tus tarjetas</strong></h2>
+        <button type="submit" class="button-58" id="administrar_tarjetas">Administrar</button>
+        <div class="anadir_tarjeta hidden">
+            <form method="post" action="{{ path('procesar_anadir_tarjeta')}}" class="formulario_tarjeta">
+                <table class="tabla_anadir_tarjeta"> 
+                    <tr>
+                        <td><label for="titular">Nombre del titular:</label></td>
+                        <td colspan="3"><input type="text" name="titular" class="input_texto frio" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="numero_tarjeta">Número de la tarjeta:</label></td>
+                        <td colspan="3"><input type="text" name="numero_tarjeta" class="input_texto frio" maxlength="16" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="ccv">CCV:</label></td>
+                        <td><input type="text" name="ccv" class="input_texto frio" maxlength="3" required></td>
+                        <td><label for="fecha_expiracion">Fecha de expiración:</label></td>
+                        <td><input type="text" name="fecha_expiracion" class="input_texto frio" placeholder="DD/MM" maxlength="5" required></td>
+                    </tr>
+                    <tr><td colspan="4"><button type="submit" class="button-58" id="boton_anadir_tarjeta" onclick="return confirm ('¿Estás seguro de que quieres continuar?');">Añadir tarjeta</button></td></tr>
+                </table>
+            </form>
+        </div>
+        <div class="div_tabla_tarjetas hidden">
+            <table class = "styled-table">
+            <thead>
+                <tr>
+                    <td><strong>Titular de la tarjeta</strong></td>
+                    <td><strong>Número de la tarjeta</strong></td>
+                    <td><strong>CVV</strong></td>
+                    <td><strong>Fecha expiración</strong></td>
+                    <td><strong>Eliminar tarjeta</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarjeta in tarjetas %}
+                    <tr>
+                        <td>{{ tarjeta.nombreTitular }}</td>
+                        <td>{{ tarjeta.numeroTarjeta }}</td>
+                        <td>{{ tarjeta.ccv }}</td>
+                        <td>{{ tarjeta.fechaExpiracion }}</td>
+                        <td class="seccion_comprar_separado">
+                            <form action = "{{ path('procesar_eliminacion_tarjeta') }}" method = "post">
+                                <input type="hidden" name="id_tarjeta" value="{{ tarjeta.idTarjeta }}">
+                                <button type="submit" class="cancelar_pedido">Eliminar tarjeta</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</section>
+<script src="{{ asset('JS/script_usuario.js') }}"></script>
+
+{% endblock %}

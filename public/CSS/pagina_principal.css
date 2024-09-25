@@ -1,0 +1,44 @@
+.categorias {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.categoria {
+    text-align: center;
+    margin: 10px;
+    border: 2px solid #7d7d7d;
+    border-radius: 10px;
+    width: 20%; /* Ajusta según tu necesidad */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    background-color: #333; /* Fondo del recuadro */
+    transition: transform 0.3s ease; /* Transición suave para el cambio de tamaño */
+}
+
+.categoria a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: inherit; /* Mantén el color original del texto */
+}
+
+.categoria img {
+    width: 100%;
+    height: auto; /* Ajuste automático de altura en función de la imagen */
+    object-fit: cover;
+    display: block; /* Elimina el espacio en blanco debajo de la imagen */
+}
+
+.categoria h2 {
+    margin: 10px 0;
+    font-size: 1em;
+    color: white; /* Texto en blanco */
+}
+
+.categoria:hover {
+    transform: scale(0.95); /* Reduce el tamaño del recuadro al pasar el cursor */
+}
