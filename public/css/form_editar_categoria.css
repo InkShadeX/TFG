@@ -1,0 +1,68 @@
+.editar-categoria {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.titulo-formulario {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.formulario-categoria .form-group {
+    margin-bottom: 15px;
+}
+
+.label-form {
+    display: block;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.input-form {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.input-form:focus {
+    border-color: #ff9900;
+    outline: none;
+}
+
+textarea.input-form {
+    height: 80px;
+    resize: vertical;
+}
+
+small {
+    font-size: 12px;
+    color: #888;
+}
+
+.btn-guardar {
+    background-color: #ff9900;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-guardar:hover {
+    background-color: #e68a00;
+}

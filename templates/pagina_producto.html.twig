@@ -1,4 +1,4 @@
-{% include 'cabecera.html.twig' %}
+{% extends 'header_footer.html.twig' %}
 
 {% block title %}Producto: {{ producto.nombre_producto }}{% endblock %}
 
@@ -9,26 +9,31 @@
 {% block content %}
     <div class="producto-detalle">
         <h1>{{ producto.nombre_producto }}</h1>
-        <p>Precio: {{ producto.precio }} EUR</p>
-        <p>{{ producto.descripcion_producto }}</p>
+        
+        <div class="producto-descripcion">
+            <p>{{ producto.descripcion_producto }}</p>
+        </div>
+        
         {% if producto.foto %}
             <div class="producto-imagen-container">
                 <img src="{{ asset('images/' ~ producto.foto) }}" alt="{{ producto.nombre_producto }}" class="producto-imagen">
-            </div>        {% else %}
+            </div>
+        {% else %}
             <p>No hay imagen disponible.</p>
         {% endif %}
 
-        {# <form action="{{ path('producto_detalle', {'id': producto.id_producto}) }}" method="post">
-            <div class="form-group">
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" id="cantidad" name="cantidad" min="1" value="1" required>
-            </div>
-            <button type="submit">Añadir al carrito</button>
-        </form> #}
-        <form action="{{ path('añadir_al_orden', { id_producto: producto.id_producto }) }}" method="post">
+        <p id="precio">Precio: {{ producto.precio }} EUR</p>
+        
+        <form class="producto-form" action="{{ path('añadir_orden', { id_producto: producto.id_producto }) }}" method="post">
             <label for="cantidad">Cantidad:</label>
             <input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
-            <button type="submit">Añadir al carrito</button>
-        </form>
+            <button id="añadir_carrito" type="submit">Añadir al carrito</button>
+            
+        </form><br>
+        {% if app.session.flashBag.has('success') %}
+            <div class="mensaje">
+                {{ app.session.flashBag.get('success')|first }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

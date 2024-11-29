@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/form_editar_usuario.css') }}">
+    </head>
+    <body>
+    {% include 'header_footer.html.twig' %}
+        <div class="editar-usuario">
+            <h1 class="titulo-formulario">Editar Usuario: {{ usuario.nombreUsuario }}</h1>
+
+            <form action="{{ path('editar_usuario', {id: usuario.idUsuario}) }}" method="post" class="formulario-usuario">
+                <div class="form-group">
+                    <label for="nombre_usuario" class="label-form">Nombre:</label>
+                    <input type="text" id="nombre_usuario" name="nombre_usuario" value="{{ usuario.nombreUsuario }}" class="input-form" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido_usuario" class="label-form">Apellido:</label>
+                    <input type="text" id="apellido_usuario" name="apellido_usuario" value="{{ usuario.apellidoUsuario }}" class="input-form" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="label-form">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ usuario.email }}" class="input-form" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion" class="label-form">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" value="{{ usuario.direccion }}" class="input-form">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="label-form">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="input-form">
+                    <small>Déjalo vacío si no deseas cambiar la contraseña.</small>
+                </div>
+                <button type="submit" class="btn-guardar">Guardar cambios</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -77,22 +77,16 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
         $this->direccion = $direccion;
     }
 
-    public function getRol() {
-        return $this->rol;
-    }
-
-    public function setRol($rol) {
-        $this->rol = $rol;
-    }
-
     // Implementación de métodos obligatorios para UserInterface
-    public function getRoles(): array
-    {
+    public function getRoles(): array {
         if ($this->rol == 1) {
             return ['ROLE_USER', 'ROLE_ADMIN'];
-        } else {
-            return ['ROLE_USER'];
         }
+        return ['ROLE_USER']; // Usuario normal por defecto
+    }
+
+    public function setRol($rol): void {
+        $this->rol = $rol;
     }
 
     public function getUserIdentifier(): string {

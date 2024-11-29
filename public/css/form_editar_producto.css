@@ -1,0 +1,67 @@
+.editar-producto {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.titulo-formulario {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.formulario-producto .form-group {
+    margin-bottom: 15px;
+}
+
+.label-form {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.input-form {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.input-form:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+textarea.input-form {
+    height: 100px;
+    resize: vertical;
+}
+
+select.input-form {
+    padding: 10px;
+}
+
+.btn-guardar {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-guardar:hover {
+    background-color: #218838;
+}

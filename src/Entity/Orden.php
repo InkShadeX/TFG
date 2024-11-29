@@ -7,26 +7,22 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'orden')]
 class Orden
 {
-
-	#[ORM\Id]
-    #[ORM\Column(type:'integer', name:'ID_ORDEN')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer', name: 'id_orden')]
     #[ORM\GeneratedValue]
     private $id_orden;
 
-    #[ORM\ManyToOne(targetEntity: 'Producto')]
-    #[ORM\JoinColumn(name: 'producto', referencedColumnName: 'ID_PRODUCTO')]
+    #[ORM\ManyToOne(targetEntity: Producto::class)]
+    #[ORM\JoinColumn(name: 'producto', referencedColumnName: 'id_producto')]
     private $producto;
 
-    // #[ORM\Column(type:'string', name:'PRODUCTO')]
-    // private $producto;
-
-    #[ORM\Column(type:'integer', name:'CANTIDAD')]
+    #[ORM\Column(type: 'integer', name: 'cantidad')]
     private $cantidad;
 
-    #[ORM\Column(type:'string', name:'ESTADO')]
+    #[ORM\Column(type: 'string', name: 'estado')]
     private $estado;
 
-    #[ORM\Column(type:'integer', name:'USUARIO')]
+    #[ORM\Column(type: 'integer', name: 'usuario')]
     private $usuario;
 
     public function getId_orden(){
@@ -63,6 +59,4 @@ class Orden
     public function setUsuario($usuario){
         $this->usuario = $usuario;
     }
-
-
 }

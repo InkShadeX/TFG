@@ -15,35 +15,43 @@ class ControladorProducto extends AbstractController
     #[Route('/producto/{id}', name: 'producto_detalle')]
     public function productoDetalle($id, Request $request, EntityManagerInterface $entityManager)
     {
-        $producto = $entityManager->getRepository(Producto::class)->find($id);
-
-        if (!$producto) {
-            throw $this->createNotFoundException('Producto no encontrado');
+        if ($this->getUser() == null) {
+            return $this->render("anuncio_error.html.twig", [ "mensaje" => "Si no estás logeado, no puedes acceder :(" ]);
         }
+        else {
+            $producto = $entityManager->getRepository(Producto::class)->find($id);
 
-        if ($request->isMethod('POST')) {
-            $cantidad = (int) $request->request->get('cantidad', 1);
-            $usuarioId = $this->getUser() ? $this->getUser()->getId() : 0; // Asume que el usuario está autenticado
+            // Obtiene el usuario autenticado
+            $user = $this->getUser();
 
-            // Crear una nueva orden
-            $orden = new Orden();
-            $orden->setProducto($producto);
-            $orden->setCantidad($cantidad);
-            $orden->setEstado('Pendiente');
-            $orden->setUsuario($usuarioId);
+            if (!$producto) {
+                throw $this->createNotFoundException('Producto no encontrado');
+            }
+
+            if ($request->isMethod('POST')) {
+                $cantidad = (int) $request->request->get('cantidad', 1);
+                $usuarioId = $this->getUser() ? $this->getUser()->getId() : 0; // Asume que el usuario está autenticado
+
+                // Crear una nueva orden
+                $orden = new Orden();
+                $orden->setProducto($producto);
+                $orden->setCantidad($cantidad);
+                $orden->setEstado('Pendiente');
+                $orden->setUsuario($usuarioId);
 
 
-            $entityManager->persist($orden);
-            $entityManager->flush();
+                $entityManager->persist($orden);
+                $entityManager->flush();
 
-            $this->addFlash('success', 'Producto añadido al carrito.');
+                $this->addFlash('success', 'Producto añadido al carrito.');
 
-            return $this->redirectToRoute('producto_detalle', ['id' => $id]);
+                return $this->redirectToRoute('producto_detalle', ['id' => $id]);
+            }
+
+            return $this->render('pagina_producto.html.twig', [
+                'producto' => $producto, 'user' => $user
+            ]);
         }
-
-        return $this->render('pagina_producto.html.twig', [
-            'producto' => $producto,
-        ]);
     }
 }
         

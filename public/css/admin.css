@@ -1,0 +1,268 @@
+/* Estilo para los checkboxes */
+.toggle-sections {
+    width: 90%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 0;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-sections label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    cursor: pointer;
+}
+
+.toggle-sections input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+/* Estilo de los botones */
+.action-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 5px;
+    width: 100px;
+}
+
+/* Botón editar */
+.action-button.edit {
+    background-color: #3498db;
+    color: white;
+}
+
+.action-button.edit:hover {
+    background-color: #2980b9;
+}
+
+/* Botón eliminar */
+.action-button.delete {
+    background-color: #e74c3c;
+    color: white;
+    width: 300px;
+}
+
+.action-button.delete:hover {
+    background-color: #c0392b;
+}
+
+/* Botón eliminar */
+.action-button.select-all {
+    background-color: #3ae665;
+    color: white;
+    width: 250px;
+}
+
+.action-button.select-all:hover {
+    background-color: #1bff54;
+}
+
+.action-buttons {
+    display: flex; /* Activa el flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    gap: 10px; /* Espaciado entre los botones */
+    margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+.search-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+    border-color: #2980b9;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #3498db;
+}
+
+
+
+/* Responsive */
+@media (max-width: 900px) {
+    .search-input {
+        font-size: 0.85rem;
+    }
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para los títulos de secciones */
+.titulo-section {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para las tablas */
+.table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Estilos para las tablas específicas */
+.tabla-usuarios,
+.tabla-productos,
+.tabla-categorias {
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* Encabezados de tabla */
+thead {
+    background-color: #2c3e50;
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+/* Alternar colores de filas */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Estilos para los formularios de creación */
+.form-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos de formularios */
+.form-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Estilos de etiquetas */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Estilos de entradas de formulario */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Botones de creación */
+.form-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Efecto hover en los botones */
+.form-button:hover {
+    background-color: #2980b9;
+}
+
+/* Estilos para los enlaces */
+a {
+    text-decoration: none;
+    color: #3498db;
+    padding: 10px 15px;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Espacios entre tablas */
+table + h2 {
+    margin-top: 50px;
+}
+
+/* Diseño responsivo */
+@media (max-width: 1200px) {
+    th, td {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 900px) {
+    table {
+        width: 95%;
+    }
+
+    th, td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    a {
+        padding: 8px 12px;
+    }
+}

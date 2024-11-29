@@ -1,0 +1,44 @@
+<html>
+    <head>
+    <link rel="stylesheet" href="{{ asset('css/form_editar_producto.css') }}">
+    </head>
+    <body>
+    {% include 'header_footer.html.twig' %}
+    <div class="editar-producto">
+        <h1 class="titulo-formulario">Editar Producto: {{ producto.nombre_producto }}</h1>
+
+        <form action="{{ path('editar_producto', {id: producto.id_producto}) }}" method="post" class="formulario-producto">
+            <div class="form-group">
+                <label for="nombre_producto" class="label-form">Nombre:</label>
+                <input type="text" id="nombre_producto" name="nombre_producto" value="{{ producto.nombre_producto }}" class="input-form" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="label-form">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" class="input-form">{{ producto.descripcion_producto }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="precio" class="label-form">Precio:</label>
+                <input type="number" id="precio" name="precio" value="{{ producto.precio }}" class="input-form" step="0.01" required>
+            </div>
+
+            {# <div class="form-group">
+                <label for="stock" class="label-form">Stock:</label>
+                <input type="number" id="stock" name="stock" value="{{ producto.stock }}" class="input-form" required>
+            </div> #}
+
+            <div class="form-group">
+                <label for="categoria" class="label-form">Categoría:</label>
+                <select id="categoria" name="categoria" class="input-form" required>
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.idCategoria }}" {% if categoria.idCategoria == producto.categoria.idCategoria %}selected{% endif %}>{{ categoria.nombreCategoria }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn-guardar">Guardar cambios</button>
+        </form>
+    </div>
+    </body>
+</html>

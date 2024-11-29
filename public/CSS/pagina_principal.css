@@ -2,7 +2,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 30px;
+    padding: 80px;
+    margin-top: 50px; /* Ajusta el margen según sea necesario */
 }
 
 .categoria {
@@ -35,8 +36,15 @@
 
 .categoria h2 {
     margin: 10px 0;
-    font-size: 1em;
-    color: white; /* Texto en blanco */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff; /* Texto en blanco */
+    transition: color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+/* Cambia el color del texto al hacer hover */
+.categoria:hover h2 {
+    color: #eeff6c; /* Cambia el color de las letras al hacer hover */
 }
 
 .categoria:hover {

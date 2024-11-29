@@ -1,10 +1,8 @@
-{% include 'cabecera.html.twig' %}
+{% include 'header_footer.html.twig' %}
 
-{% block title %}Mi Tienda{% endblock %}
 
 {% block css %}
     <!-- Estilos específicos de la página -->
-    <link rel="stylesheet" href="{{ asset('css/estilos_comunes.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pagina_carrito.css') }}">
 
     {# Fonts #}
@@ -15,17 +13,29 @@
 
 {% block content %}
     <h1>Tu carrito:</h1>
-    <form action = "{{ path('procesar_comprar_todo') }}" method = "post">
+    <form id="form_comprar_todo" action="{{ path('procesar_comprar_todo') }}" method="post" onsubmit="return validarTarjetaSeleccionada()">
         <input type="hidden" name="id_usuario" value="{{ id_usuario }}">
         <button type="submit" class="comprar_todo">Comprar todo</button>
+        <span class="precio_total">PRECIO TOTAL: <strong>{{ totalPrecio }} €</strong></span>
+        <div class="select">
+            <select id="selector_tarjeta">
+                <option value="">Selecciona una tarjeta</option>
+                {% for tarjeta in tarjetas %}
+                    <option value="{{ tarjeta.numeroTarjeta }}">{{ tarjeta.numeroTarjeta }}</option>
+                {% endfor %}
+            </select>
+        </div>
     </form>
+    
     <div class="zona-carrito">
-        <table class = "styled-table">
+        <table class="styled-table">
             <thead>
                 <tr>
                     <td><strong>Número de orden</strong></td>
                     <td><strong>Producto</strong></td>
                     <td><strong>Cantidad</strong></td>
+                    <td><strong>Precio Unidad</strong></td>
+                    <td><strong>Precio Total</strong></td>
                     <td><strong>Comprar por separado</strong></td>
                     <td><strong>Borrar orden</strong></td>
                 </tr>
@@ -36,15 +46,17 @@
                         <td>{{ orden.id_orden }}</td>
                         <td>{{ orden.producto.nombre_producto }}</td>
                         <td>{{ orden.cantidad }}</td>
+                        <td>{{ orden.producto.precio }} €</td>
+                        <td>{{ orden.cantidad * orden.producto.precio }} €</td>
                         <td class="seccion_comprar_separado">
-                            <form action = "{{ path('procesar_comprar_separado') }}" method = "post">
+                            <form id="form_comprar_separado_{{ orden.id_orden }}" action="{{ path('procesar_comprar_separado') }}" method="post" onsubmit="return validarTarjetaSeleccionada()">
                                 <input type="hidden" name="id_usuario" value="{{ orden.usuario }}">
                                 <input type="hidden" name="id_orden" value="{{ orden.id_orden }}">
                                 <button type="submit" class="comprar_separado">Comprar</button>
                             </form>
                         </td>
                         <td class="seccion_eliminar_orden">
-                            <form action = "{{ path('procesar_eliminacion') }}" method = "post">
+                            <form action="{{ path('procesar_eliminacion') }}" method="post">
                                 <input type="hidden" name="id_orden" value="{{ orden.id_orden }}">
                                 <button type="submit" class="eliminar_orden" onclick="return confirm ('¿Estás seguro de querer eliminar esta orden?');">Eliminar</button>
                             </form>
@@ -54,4 +66,21 @@
             </tbody>
         </table>
     </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function validarTarjetaSeleccionada() {
+        var tarjetaSeleccionada = document.getElementById('selector_tarjeta').value;
+
+        // Si no se seleccionó ninguna tarjeta, mostrar alerta y detener el envío del formulario
+        if (!tarjetaSeleccionada) {
+            alert('Por favor, selecciona una tarjeta antes de continuar.');
+            return false;
+        }
+
+        // Si se seleccionó una tarjeta, permitir el envío
+        return true;
+    }
+</script>
 {% endblock %}

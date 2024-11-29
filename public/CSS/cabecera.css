@@ -48,11 +48,11 @@ body.dark nav{
 
 }
 
-nav .nav-bar{
+nav .nav-bar {
     position: relative;
-    height: 100%;
-    max-width: 1000px;
-    width: 100%;
+    height: 70px;
+    max-width: 1200px; /* Aumenta este valor según lo que necesites */
+    width: 100%; /* O ajusta esto si prefieres un ancho fijo */
     background-color: var(--nav-color);
     margin: 0 auto;
     padding: 0 30px;
@@ -288,4 +288,30 @@ body.dark .search-field i{
         display: block;
         margin-top: 20px;
     }
+
+
+    .categorias > *:first-child {
+        margin-top: 50px; /* Ajusta según lo necesites */
+    }
+
+   
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+}
+
+/* Para asegurar que el footer se mantenga en la parte inferior de la página */
+main {
+    flex: 1;
+}
+
+#img_logo {
+    width: 300px;
+    margin-top: 10px;
 }

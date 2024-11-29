@@ -11,24 +11,24 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Producto
 {
 	#[ORM\Id]
-    #[ORM\Column(type:'integer', name:'ID_PRODUCTO')]
+    #[ORM\Column(type:'integer', name:'id_producto')]
     #[ORM\GeneratedValue]
     private $id_producto;
 
-    #[ORM\Column(type:'string', name:'NOMBRE_PRODUCTO')]
+    #[ORM\Column(type:'string', name:'nombre_producto')]
     private $nombre_producto;
 
-    #[ORM\Column(type:'string', name:'DESCRIPCION_PRODUCTO')]
+    #[ORM\Column(type:'string', name:'descripcion_producto')]
     private $descripcion_producto;
 
-    #[ORM\Column(type:'decimal', name:'PRECIO')]
+    #[ORM\Column(type:'decimal', name:'precio')]
     private $precio;
 
     #[ORM\ManyToOne(targetEntity: 'Categoria', inversedBy: 'producto')]
-    #[ORM\JoinColumn(name: 'categoria', referencedColumnName: 'ID_CATEGORIA')]
+    #[ORM\JoinColumn(name: 'categoria', referencedColumnName: 'id_categoria')]
     private $categoria;
 
-    #[ORM\Column(type:'string', name:'FOTO')]
+    #[ORM\Column(type:'string', name:'foto')]
     private $foto;
 
 

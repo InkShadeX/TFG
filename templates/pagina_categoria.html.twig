@@ -1,24 +1,29 @@
-{% include 'cabecera.html.twig' %}
+{% extends 'header_footer.html.twig' %}
 
 {% block title %}Categoría: {{ categoria.nombreCategoria }}{% endblock %}
 
-{% block content %}
-    <div class="categoria-detalle">
-        <h1>{{ categoria.nombreCategoria }}</h1>
-
-        <h2>Productos:</h2>
-        <ul>
-            {% for producto in productos %}
-                <li>
-                    <a href="{{ path('producto_detalle', { 'id': producto.id_producto }) }}">
-                        {{ producto.nombre_producto }}
-                    </a>
-                    - {{ producto.precio }} EUR
-                </li>
-            {% else %}
-                <li>No hay productos en esta categoría.</li>
-            {% endfor %}
-        </ul>
-    </div>
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/pagina_categoria.css') }}">
 {% endblock %}
 
+{% block content %}
+    <div class="categoria-wrapper">
+        <div class="categoria-detalle">
+            <h1>{{ categoria.nombreCategoria }}</h1>
+
+            <h2>Productos:</h2>
+            <ul>
+                {% for producto in productos %}
+                    <li>
+                        <a href="{{ path('producto_detalle', { 'id': producto.id_producto }) }}">
+                            <img src="{{ asset('images/' ~ producto.foto) }}" alt="{{ producto.nombre_producto }}">
+                            <p>{{ producto.nombre_producto }}</p>
+                        </a>
+                    </li>
+                {% else %}
+                    <li id="vacio">No hay productos en esta categoría.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

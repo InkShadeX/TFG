@@ -1,6 +1,5 @@
-{% include 'cabecera.html.twig' %}
+{% include 'header_footer.html.twig' %}
 
-{% block title %}Usuario{% endblock %}
 
 {% block css %}
     <!-- Estilos específicos de la página principal -->
@@ -15,7 +14,7 @@
 
 {% block content %}
 <section class="categorias">
-    <h1>¡Bienvenido de nuevo, {{ app.user.getNombreUsuario() }}!</h1>
+    <h1 class="bienvenida">¡Bienvenido de nuevo, {{ app.user.getNombreUsuario() }}!</h1>
     <div class="main_div div_editar_usuario">
         <h2><strong>Editar tu usuario</strong></h2>
         <button class="button-58" id="boton_editar">Editar</button>
@@ -137,6 +136,6 @@
         </div>
     </div>
 </section>
-<script src="{{ asset('JS/script_usuario.js') }}"></script>
+<script src="{{ asset('js/script_usuario.js') }}"></script>
 
 {% endblock %}

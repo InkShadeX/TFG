@@ -12,49 +12,50 @@ use App\Entity\Producto;
 
 class ControladorOrden extends AbstractController
 {
-    #[Route('/orden/{id}', name: 'orden')]
-    public function orden($id, EntityManagerInterface $entityManager)
-    {
-        // Obtener la orden usando el ID (o crear una nueva si no existe)
-        $orden = $entityManager->getRepository(Orden::class)->find($id);
 
-        if (!$orden) {
-            throw $this->createNotFoundException('orden no encontrada');
-        }
-
-        $productos = $orden->getProductos();
-
-        return $this->render('pagina_ordenes.html.twig', [
-            'productos' => $productos,
-        ]);
-    }
-
-    #[Route('/añadir-al-orden/{id_producto}', name: 'añadir_al_orden')]
+    #[Route('/añadir_orden/{id_producto}', name: 'añadir_orden')]
     public function añadirAlCarrito($id_producto, Request $request, EntityManagerInterface $entityManager)
-    {
-        $producto = $entityManager->getRepository(Producto::class)->find($id_producto);
+    { 
 
-        if (!$producto) {
-            throw $this->createNotFoundException('Producto no encontrado');
+        if ($this->getUser() == null) {
+            return $this->render("anuncio_error.html.twig", [ "mensaje" => "Si no estás logeado, no puedes acceder :(" ]);
         }
+        else {
+            if ($request->isMethod('GET')) {
+                return $this->render("anuncio_error.html.twig", [
+                    "mensaje" => "Debes usar el formulario para añadir productos al carrito."
+                ]);
+            }
+            
+            $producto = $entityManager->getRepository(Producto::class)->find($id_producto);
 
-        $cantidad = $request->request->get('cantidad', 1);
+            if (!$producto) {
+                throw $this->createNotFoundException('Producto no encontrado');
+            }
 
-        // Aquí hay que manejar añadir al carrito
-        // Por ejemplo, guardarlo en la base de datos, etc.
+            $cantidad = $request->request->get('cantidad', 1);
 
-        // Ejemplo de como crear una nueva orden
-        $orden = new Orden();
-        $orden->setProducto($producto);
-        $orden->setCantidad($cantidad);
-        $orden->setEstado('pendiente'); // O el estado que desees
-        $orden->setUsuario(1); // Aquí deberías poner el ID del usuario si es necesario
+            $user = $this->getUser();
 
-        $entityManager->persist($orden);
-        $entityManager->flush();
+            if (!$user) {
+                throw $this->createAccessDeniedException('No estás autenticado.');
+            }
+        
+            $idUsuario = $user->getIdUsuario();
 
-        $this->addFlash('success', 'Producto añadido al carrito.');
+            // Ejemplo de como crear una nueva orden
+            $orden = new Orden();
+            $orden->setProducto($producto);
+            $orden->setCantidad($cantidad);
+            $orden->setEstado('En espera'); // O el estado que desees
+            $orden->setUsuario($idUsuario); // Aquí deberías poner el ID del usuario si es necesario
 
-        return $this->redirectToRoute('producto_detalle', ['id' => $id_producto]);
+            $entityManager->persist($orden);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Producto añadido al carrito.');
+
+            return $this->redirectToRoute('producto_detalle', ['id' => $id_producto]);
+        }
     }
 }

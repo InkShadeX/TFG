@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="{{ asset('CSS/pagina_factura.css') }}">
+
+  {# Fonts #}
+    <link rel="stylesheet" href="{{ asset('CSS/admin.css') }}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+</body>
+<!-- Checkboxes para mostrar/ocultar secciones -->
+    <div class="toggle-sections">
+        <label>
+            <input type="checkbox" id="toggle-usuarios" checked>
+            Mostrar Usuarios
+        </label>
+        <label>
+            <input type="checkbox" id="toggle-productos" checked>
+            Mostrar Productos
+        </label>
+        <label>
+            <input type="checkbox" id="toggle-categorias" checked>
+            Mostrar Categorías
+        </label>
+    </div>
+    <div id="seccion-usuarios" class="toggleable-section">
+        <h2 class="titulo-section">Usuarios</h2>
+
+        <div class="search-container">
+            <input type="text" id="search-usuarios" placeholder="Buscar usuarios..." class="search-input">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <!-- Botones para seleccionar y eliminar -->
+        <div class="action-buttons">
+            <button class="action-button select-all" onclick="toggleSelectAll('tabla-usuarios')">Seleccionar todos</button>
+            <button class="action-button delete" onclick="bulkDelete('tabla-usuarios')">Eliminar seleccionados</button>
+        </div>
+
+        <div class="scroll-container">
+            <table class="tabla-usuarios">
+                <thead>
+                    <tr>
+                        <th>Marcar</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="usuarios-list">
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td><input type="checkbox" name="usuarios[]" value="{{ usuario.idUsuario }}"></td>
+                        <td>{{ usuario.idUsuario }}</td>
+                        <td>{{ usuario.nombreUsuario }}</td>
+                        <td>{{ usuario.apellidoUsuario }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>
+                            <form action="{{ path('form_editar_usuario', { id: usuario.idUsuario }) }}" method="post" class="form-accion">
+                                <button type="submit" class="action-button edit">Editar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="seccion-productos" class="toggleable-section">
+        <h2 class="titulo-section">Productos</h2>
+
+        <div class="search-container">
+            <input type="text" id="search-productos" placeholder="Buscar productos..." class="search-input">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <!-- Botones para seleccionar y eliminar -->
+        <div class="action-buttons">
+            <button class="action-button select-all" onclick="toggleSelectAll('tabla-productos')">Seleccionar todos</button>
+            <button class="action-button delete" onclick="bulkDelete('tabla-productos')">Eliminar seleccionados</button>
+        </div>
+
+        <div class="scroll-container">
+            <table class="tabla-productos">
+                <thead>
+                    <tr>
+                        <th>Marcar</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productos-list">
+                    {% for producto in productos %}
+                    <tr>
+                        <td><input type="checkbox" name="productos[]" value="{{ producto.id_producto }}"></td>
+                        <td>{{ producto.id_producto }}</td>
+                        <td>{{ producto.nombre_producto }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>
+                            <form action="{{ path('form_editar_producto', {id: producto.id_producto}) }}" method="post" class="form-accion">
+                                <button type="submit" class="action-button edit">Editar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="seccion-categorias" class="toggleable-section">
+        <h2 class="titulo-section">Categorías</h2>
+
+        <div class="search-container">
+            <input type="text" id="search-categorias" placeholder="Buscar categorías..." class="search-input">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <!-- Botones para seleccionar y eliminar -->
+        <div class="action-buttons">
+            <button class="action-button select-all" onclick="toggleSelectAll('tabla-categorias')">Seleccionar todos</button>
+            <button class="action-button delete" onclick="bulkDelete('tabla-categorias')">Eliminar seleccionados</button>
+        </div>
+
+        <div class="scroll-container">
+            <table class="tabla-categorias">
+                <thead>
+                    <tr>
+                        <th>Marcar</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="categorias-list">
+                    {% for categoria in categorias %}
+                    <tr>
+                        <td><input type="checkbox" name="categorias[]" value="{{ categoria.idCategoria }}"></td>
+                        <td>{{ categoria.idCategoria }}</td>
+                        <td>{{ categoria.nombreCategoria }}</td>
+                        <td>
+                            <form action="{{ path('form_editar_categoria', {id: categoria.idCategoria}) }}" method="get" class="form-accion">
+                                <button type="submit" class="action-button edit">Editar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{{ asset('js/script_admin.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}" defer></script>
+</html>

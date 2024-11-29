@@ -28,7 +28,7 @@ const body = document.querySelector("body"),
         searchToggle.classList.toggle("active");
       });
  
-      
+
 //   js code to toggle sidebar
 sidebarOpen.addEventListener("click" , () =>{
     nav.classList.add("active");

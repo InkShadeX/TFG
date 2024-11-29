@@ -25,16 +25,14 @@ class ControladorLoginRegistro extends AbstractController {
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $error = "";
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $mensaje = $error ? "Usuario o Contraseña inválida" : null;
 
-        if ($authenticationUtils->getLastAuthenticationError()) {
-            $error = "Contrasena invalida";
-        }
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('pagina_login.html.twig');
+        return $this->render('pagina_login.html.twig', [
+            'mensaje' => $mensaje,
+        ]);
     }
+
 
     #[Route('/procesar_registro', name: 'procesar_registro', methods: ['POST'])]
     public function registrarUsuario(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
@@ -49,7 +47,7 @@ class ControladorLoginRegistro extends AbstractController {
         // Comprobar si ya existe un usuario con el mismo correo
         $existingUser = $entityManager->getRepository(Usuario::class)->findOneBy(['email' => $correo]);
         if ($existingUser) {
-            return $this->render('anuncio.html.twig', ["mensaje" => "El correo ya está registrado."]);
+            return $this->render('pagina_login.html.twig', ["mensaje" => "El correo o usuario ya está registrado."]);
         }
     
         // Crear una nueva instancia de Usuario
@@ -69,16 +67,30 @@ class ControladorLoginRegistro extends AbstractController {
         $entityManager->flush();
     
         // Redirigir o mostrar un mensaje de éxito
-        return $this->render('anuncio.html.twig', ["mensaje" => "Usuario registrado con éxito."]);
+        return $this->render('pagina_login.html.twig', ["mensaje" => "Usuario registrado con éxito."]);
     }
-    
-    #[Route('/prueba', name:'prueba')]
-    public function prueba(Request $request, EntityManagerInterface $entityManager): Response {    
-        $usuario_prueba = $entityManager->getRepository(Usuario::class)->find(1)->getNombreUsuario();
-        if ($usuario_prueba === null) {
-            return $this->render('anuncio.html.twig', ["mensaje" => "El usuario no ha sido encontrado."]);
+
+    #[Route('/pagina_principal', name:'pagina_principal')]
+    public function pagina_principal(Request $request, EntityManagerInterface $entityManager): Response {    
+        
+        if ($this->getUser() == null) {
+            return $this->render("anuncio_error.html.twig", [ "mensaje" => "Si no estás logeado, no puedes acceder :(" ]);
         }
-        return $this->render('anuncio.html.twig', ["mensaje" => "Usuario: " . $usuario_prueba]);
+        else {
+            // Obtiene el usuario autenticado
+            $user = $this->getUser(); 
+
+            // Obtener el repositorio de la entidad Categoria
+            $categorias = $entityManager->getRepository(Categoria::class)->findAll();
+
+            // Pasar las categorías a la vista
+            return $this->render('pagina_principal.html.twig', ['categorias' => $categorias, 'user' => $user]);
+        }
+    }
+
+    #[Route('/logout', name:'ctrl_logout')]
+    public function logout(){    
+        return new Response();
     }
 }
 

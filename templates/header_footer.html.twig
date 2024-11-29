@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="{{ asset('css/cabecera.css') }}">
+            
+    <!-- ===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <title></title>
+
+    {% block css %}{% endblock %}
+</head>
+<body>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <header>
+            <nav>
+                <div class="nav-bar">
+                    <i class='bx bx-menu sidebarOpen'></i>
+                    <span class="logo navLogo"><a href="{{ path('pagina_principal') }}"><img src="{{ asset('images/logo_alt.png') }}" id="img_logo"></a></span>
+
+                    <div class="menu">
+                        <div class="logo-toggle">
+                            <span class="logo"><a href="#">CodingLab</a></span>
+                            <i class='bx bx-x siderbarClose'></i>
+                        </div>
+                        <ul class="nav-links">
+                            <li><a href="{{ path('pagina_principal') }}">Catálogo</a></li>
+                            <li><a href="{{ path('carrito') }}">Carrito</a></li>
+                            <li><a href="{{ path('perfil_usuario') }}">Mi cuenta</a></li>
+                            <li><a href="{{ path('AboutUS') }}">Contacto</a></li>
+                            <li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('admin') }}">Administración</a>
+                                {% endif %}
+                            </li>
+                            <li><a href="{{ path('ctrl_logout') }}">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="darkLight-searchBox">
+                        <div class="dark-light">
+                            <i class='bx bx-moon moon'></i>
+                            <i class='bx bx-sun sun'></i>
+                        </div>
+
+                        <div class="searchBox">
+                            <div class="searchToggle">
+                                <i class='bx bx-x cancel'></i>
+                                <i class='bx bx-search search'></i>
+                            </div>
+
+                            <!-- Formulario de búsqueda con autocompletado de categorías -->
+                            <form id="search-form" action="{{ path('pagina_principal') }}" method="GET">
+                                <div class="search-field">
+                                    <input type="text" id="search-categorias" placeholder="Buscar categorías...">
+                                    <button type="submit" disabled>Buscar</button>
+                                    <i class='bx bx-search'></i>
+                                </div>
+                                <ul id="categorias-list"></ul> <!-- La lista de sugerencias se llenará dinámicamente -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Script para la funcionalidad de la cabecera y búsqueda -->
+    <script src="{{ asset('js/script_cabecera.js') }}"></script>
+
+    <footer class="footer">
+        <p>© 2024 Revolution. Todos los derechos reservados.</p>
+    </footer>
+    {% endif %}
+</body>
+</html>

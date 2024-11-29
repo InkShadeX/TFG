@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{{ asset('CSS/pagina_factura.css') }}">
+
+  {# Fonts #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div>
+    <div class="py-4">
+      <div class="px-14 py-6">
+        <table class="w-full border-collapse border-spacing-0">
+          <tbody>
+            <tr>
+              <td class="w-full align-top">
+                <div>
+                  <img src="{{ asset('images/logo_alt.png') }}" class="h-12" />
+                </div>
+              </td>
+
+              <td class="align-top">
+                <div class="text-sm">
+                  <table class="border-collapse border-spacing-0">
+                    <tbody>
+                      <tr>
+                        <td class="border-r pr-4">
+                          <div>
+                            <p class="whitespace-nowrap text-slate-400 text-right">Fecha</p>
+                            <p class="whitespace-nowrap font-bold text-main text-right">{{ fecha|date('d/m/Y')}}</p>
+                          </div>
+                        </td>
+                        <td class="pl-4">
+                          <div>
+                            <p class="whitespace-nowrap text-slate-400 text-right">Factura</p>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-slate-100 px-14 py-6 text-sm">
+        <table class="w-full border-collapse border-spacing-0">
+          <tbody>
+            <tr>
+              <td class="w-1/2 align-top">
+                <div class="text-sm text-neutral-600">
+                  <p class="font-bold">Empresa proovedora</p>
+                  <p>Number: 23456789</p>
+                  <p>Madrid, 28021</p>
+                  <p>España</p>
+                </div>
+              </td>
+              <td class="w-1/2 align-top text-right">
+                <div class="text-sm text-neutral-600">
+                  <p class="font-bold">Cliente</p>
+                  <p>{{ app.user.getNombreUsuario() }}  {{ app.user.getApellidoUsuario() }}</p>
+                  <p>{{ app.user.getEmail() }}</p>
+                  <p>{{ app.user.getDireccion() }}</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="px-14 py-10 text-sm text-neutral-700">
+        <table class="w-full border-collapse border-spacing-0">
+          <thead>
+            <tr>
+              <td class="border-b-2 border-main pb-3 pl-3 font-bold text-main">#</td>
+              <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Detalles del producto</td>
+              <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Precio</td>
+              <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Cantidad</td>
+              <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Subtotal</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for orden in ordenes %}
+            <tr>
+              <td class="border-b py-3 pl-3">{{ orden.id_orden }}</td>
+              <td class="border-b py-3 pl-2">{{ orden.producto.nombre_producto }}</td>
+              <td class="border-b py-3 pl-2 text-left">{{ orden.producto.precio }} €</td>
+              <td class="border-b py-3 pl-2 text-left">{{ orden.cantidad }}</td>
+              <td class="border-b py-3 pl-2 text-left">{{ orden.producto.precio * orden.cantidad }} €</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="total">
+        <p>Total: {{ total_precio }}</p>
+      </div>
+
+      <div class="px-14 text-sm text-neutral-700">
+        <p class="text-main font-bold">Detalles del pago</p>
+        <p>Titular de la tarjeta: </p>
+        <p>Pagado con la tarjeta: </p>
+      </div>
+    </div>
+      <!-- HTML !-->
+      <button class="button-89" role="button" onclick="window.print();">Descargar PDF</button>
+</body>
+
+</html>

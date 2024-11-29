@@ -1,13 +1,192 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #e3e9f7; /* Fondo claro para el modo claro */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar de modo */
+}
+
+body.dark {
+    background-color: #18191b; /* Fondo oscuro para el modo oscuro */
+}
+
 .producto-detalle {
-    text-align: center; /* Opcional: centra el contenido */
+    text-align: center;
+    max-width: 800px; /* Máximo ancho del contenedor principal */
+    margin: 100px auto; /* Ajusta el margen superior a 100px para desplazar el contenedor hacia abajo */
+    padding: 20px; /* Padding interno */
+    background-color: #f9ecec; /* Fondo claro para todo el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark .producto-detalle {
+    background-color: #333; /* Fondo oscuro para el modo oscuro */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada en modo oscuro */
+}
+
+.producto-detalle h1 {
+    margin-top: 20px; /* Espaciado superior */
+    font-size: 2em; /* Tamaño de fuente más grande */
+    color: #333; /* Color del texto en modo claro */
+    transition: color 0.3s ease;
+}
+
+body.dark .producto-detalle h1 {
+    color: #f9f9f9; /* Color del texto en modo oscuro */
+}
+
+.producto-descripcion {
+    margin-top: 20px; /* Espaciado superior */
+    max-width: 100%; /* Asegura que no se salga del contenedor */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify; /* Justifica el texto */
+    line-height: 1.5; /* Espaciado entre líneas */
+    word-wrap: break-word; /* Asegura que las palabras largas no desborden */
+    padding: 0; /* Sin padding */
+    color: #333; /* Color del texto en modo claro */
+    transition: color 0.3s ease;
+}
+
+body.dark .producto-descripcion {
+    color: #f9f9f9; /* Color del texto en modo oscuro */
 }
 
 .producto-imagen-container {
-    max-width: 300px; /* Ajusta el ancho máximo del contenedor */
-    margin: 0 auto;   /* Centra el contenedor si es necesario */
+    max-width: 300px; /* Ancho máximo del contenedor de imagen */
+    margin: 20px auto; /* Centra el contenedor y lo eleva un poco */
 }
 
 .producto-imagen {
-    width: 100%;      /* Hace que la imagen ocupe todo el ancho del contenedor */
-    height: auto;     /* Mantiene la proporción de la imagen */
+    width: 100%; /* Ancho completo del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 4px; /* Bordes redondeados en la imagen */
+    transition: border-color 0.3s ease;
+}
+
+body.dark .producto-imagen {
+    border-color: #444; /* Color del borde en modo oscuro */
+}
+
+#precio {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em; /* Tamaño de fuente para el precio ajustado */
+    margin: 10px 0; /* Espaciado superior e inferior reducido */
+    color: #fff; /* Color del texto */
+    padding: 10px; /* Padding interno */
+    background-color: #333; /* Color oscuro */
+    border-radius: 4px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark #precio {
+    background-color: #444; /* Fondo oscuro para el modo oscuro */
+    color: #fff; /* Color del texto en modo oscuro */
+}
+
+.producto-form {
+    margin-top: 20px; /* Espaciado superior para el formulario */
+    display: flex; /* Usar flexbox para alinear elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+.producto-form label {
+    margin-right: 10px; /* Espaciado a la derecha del label */
+    color: #333; /* Color del texto en modo claro */
+    transition: color 0.3s ease;
+}
+
+body.dark .producto-form label {
+    color: #f9f9f9; /* Color del texto en modo oscuro */
+}
+
+.producto-form input {
+    margin: 0 10px; /* Espaciado horizontal del input */
+    padding: 10px; /* Aumenta el padding interno para hacer el input más grande */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    width: 80px; /* Aumenta el ancho del input de cantidad */
+    text-align: center; /* Centra el texto dentro del input */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark .producto-form input {
+    background-color: #555; /* Fondo del input en modo oscuro */
+    border-color: #444; /* Borde del input en modo oscuro */
+    color: #f9f9f9; /* Color del texto en modo oscuro */
+}
+
+.producto-form button {
+    padding: 8px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 10px; /* Espaciado a la izquierda del botón */
+    height: 40px; /* Ajusta la altura del botón */
+}
+
+body.dark .producto-form button {
+    background-color: #0056b3; /* Fondo del botón en modo oscuro */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Sombra en modo oscuro */
+}
+
+#añadir_carrito {
+    width: 180px;
+    height: 50px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.15px;
+    background-color: #4B70E2;
+    color: #f9f9f9;
+    box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+body.dark #añadir_carrito {
+    background-color: #3a5bbf; /* Fondo del botón en modo oscuro */
+    box-shadow: 8px 8px 16px #202226, -8px -8px 16px #35363a; /* Sombras en modo oscuro */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    margin-top: -65px; /* Ajusta el margen superior a -65px para elevar más el footer */
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-end; 
+    height: 60px;
+    transition: background-color 0.3s ease;
+}
+
+body.dark footer {
+    background-color: #333; /* Fondo del footer en modo oscuro */
+    color: #ccc; /* Color del texto en modo oscuro */
+}
+
+#añadir_carrito:hover {
+    background-color: #3e5bbf;
+    box-shadow: 4px 4px 12px #b0b7c4, -4px -4px 12px #f9f9f9;
+    transform: scale(0.95); /* Reduce el tamaño ligeramente para dar la impresión de que se hunde */
+}
+
+.mensaje {
+    font-size: 1.5em; /* Tamaño de fuente más grande */
+    color: #333; /* Color del texto en modo claro */
+}
+
+
+body.dark .mensaje {
+    font-size: 1.5em; /* Tamaño de fuente más grande */
+    color: #fff; /* Color del texto en modo claro */
 }

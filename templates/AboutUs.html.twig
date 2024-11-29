@@ -1,0 +1,129 @@
+
+{% extends 'header_footer.html.twig' %}
+
+{% block content %}
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-od+8NIY4dC6j6QbH3F1XSo7UwG7nXl7R+p3GRkufKV8=" crossorigin=""/>
+    {% endblock %}
+
+    <section class="about-us">
+        <h1>Sobre Nosotros</h1>
+        <br>
+        <p>Bienvenido a <strong>Revolution Store</strong>, donde la innovación y la calidad se encuentran en cada rincón. Somos una tienda con una misión: proporcionarte productos únicos, de alta calidad y una experiencia de compra que te dejará satisfecho desde el primer momento.</p>
+        <br>
+        <div class="accordion">
+            <div class="accordion-item">
+                <button class="accordion-button">Nuestra Historia</button>
+                <div class="accordion-content">
+                    <p>Fundada en el corazón de Madrid en 2020, Revolution Store comenzó como un pequeño emprendimiento enfocado en ofrecer productos de calidad para personas que valoran el diseño, la durabilidad y la sostenibilidad. Nuestro equipo, conformado por jóvenes apasionados por la tecnología y el buen gusto, se ha expandido rápidamente, ofreciendo cada vez más productos únicos.</p>
+                </div>
+            </div>
+
+
+
+            <div class="accordion-item">
+                <button class="accordion-button">Nuestra Filosofía</button>
+                <div class="accordion-content">
+                    <p>En Revolution Store, creemos que cada cliente merece lo mejor. Por eso, seleccionamos cuidadosamente nuestros productos, manteniendo un enfoque en la sostenibilidad, el diseño innovador y la experiencia de usuario. Queremos que cuando elijas comprar con nosotros, sientas que estás tomando la mejor decisión tanto para ti como para el mundo.</p>
+                </div>
+            </div>
+
+
+
+            <div class="accordion-item">
+                <button class="accordion-button">El Equipo</button>
+                <div class="accordion-content">
+                    <p>Somos un equipo diverso y apasionado que se esfuerza por crear una experiencia inolvidable. Desde diseñadores hasta expertos en tecnología, cada uno aporta lo mejor de sí mismo para que cada detalle de nuestra tienda sea perfecto.</p>
+                    <ul>
+                        <li><strong>Isabel Martínez</strong> – Fundadora y Directora Creativa</li>
+                        <li><strong>Carlos Durán</strong> – Director de Tecnología</li>
+                        <li><strong>Sara García</strong> – Responsable de Marketing y Relaciones Públicas</li>
+                        <li><strong>Pedro Jiménez</strong> – Jefe de Ventas</li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="accordion-item">
+                <button class="accordion-button">Nuestros Valores</button>
+                <div class="accordion-content">
+                    <ul class="values-list">
+                        <li><strong>Calidad:</strong> Trabajamos solo con los mejores materiales y productos cuidadosamente seleccionados.</li>
+                        <li><strong>Sostenibilidad:</strong> Estamos comprometidos con prácticas respetuosas con el medio ambiente.</li>
+                        <li><strong>Innovación:</strong> Cada día nos esforzamos por mejorar nuestros procesos y productos.</li>
+                        <li><strong>Transparencia:</strong> Te contamos todo lo que necesitas saber sobre los productos que vendemos.</li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="accordion-item">
+                <button class="accordion-button">Lo Que Dicen Nuestros Clientes</button>
+                <div class="accordion-content">
+                    <!-- Contenedor para los comentarios dinámicos -->
+                    <div id="random-comments">
+                        <p>Cargando comentarios...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h2>¿Dónde encontrarnos?</h2>  <br>
+        <p>Nuestra tienda se encuentra en pleno corazón de Madrid, rodeada de los principales puntos de interés de la ciudad. Con un fácil acceso, te ofrecemos la mejor experiencia de recogida en tienda. A continuación puedes encontrar nuestra ubicación exacta en el mapa, junto con tu ubicación actual para facilitar la ruta.</p>
+        <br>
+        <div class="contact-map-container">
+            <div class="contact-info">
+                <ul id="contact-info">
+                    <li><strong>Dirección:</strong> Calle del Centro, Madrid</li>
+                    <li><strong>Horario:</strong> Lunes a Viernes, 10:00 AM - 8:00 PM</li>
+                    <li><strong>Estado:</strong> <span id="store-status">Verificando...</span></li>
+                    <li><strong>Teléfono:</strong> +34 912 345 678</li>
+                    <li><strong>Email:</strong> contacto@mitienda.com</li>
+                </ul>
+                <br>
+            </div>
+            <div class="map-container" id="map"></div>
+        </div>
+
+        <br>
+        <br>
+        <div class="contact-form">
+            <h2>Contáctanos</h2>
+            <form action="{{ path('contact_send') }}" method="post">
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                </div>
+
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+        </div>
+
+    </section>
+
+
+
+
+    <!-- Incluye tus scripts al final del body -->
+    <script src="{{ asset('js/AboutUs.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3zBC9xUJnSh10NpA5CcSfiquI3QV6j_k&libraries=places"></script>
+
+
+{% endblock %}

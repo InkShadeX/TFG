@@ -311,3 +311,41 @@ button:focus {
   opacity: 0;
   height: 0;
 }
+
+
+
+
+
+
+
+/* CSS para el modo oscuro */
+body.dark {
+  background-color: #18191b; /* Color de fondo oscuro */
+}
+
+body.dark h1.bienvenida {
+  color: white; /* Asegura que sea blanco en modo oscuro */
+}
+
+
+
+
+
+/* Asegúrate de que el body y el contenedor principal sean flexibles */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Hace que el cuerpo ocupe al menos toda la altura de la ventana */
+}
+
+main {
+  flex: 1; /* Esto hace que el main ocupe todo el espacio disponible */
+}
+
+/* Estilos del footer */
+footer {
+  background-color: #333; /* Color de fondo del footer */
+  color: white; /* Color de texto del footer */
+  padding: 20px; /* Espaciado del footer */
+  text-align: center; /* Alineación del texto */
+}

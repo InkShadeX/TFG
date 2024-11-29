@@ -56,7 +56,7 @@ button:focus {
 
 .styled-table thead tr {
     background-color: #333;
-    color: #ffffff;
+    color: #f9ecec;
     text-align: center;
 }
 
@@ -65,11 +65,11 @@ button:focus {
 }
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #b0b0b0;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: #f9ecec;
 }
 
 .styled-table tbody tr:last-of-type {
@@ -95,3 +95,97 @@ button:focus {
 .eliminar_orden {
     background-color: rgb(255, 0, 0);
 }
+
+.precio_total {
+    font-size: 1em; 
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #333;
+    border-radius: 4px;
+    background-color: #f9ecec;
+    display: inline-block; 
+}
+
+/* Estilos generales para los recuadros */
+.styled-table tbody tr {
+    transition: none; /* Elimina la transición de tiempo */
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9ecec; /* Color original para los recuadros pares */
+}
+
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #fff; /* Color original para los recuadros impares */
+}
+
+/* Estilos en modo oscuro */
+body.dark .styled-table tbody tr:nth-of-type(even) {
+    background-color: #666; /* Gris para recuadros pares en modo oscuro */
+}
+
+body.dark .styled-table tbody tr:nth-of-type(odd) {
+    background-color: #ccc; /* Color más oscuro para recuadros impares en modo oscuro */
+}
+
+body.dark .styled-table tbody tr td {
+    color: #fff; /* Texto en blanco para todas las celdas en modo oscuro */
+}
+
+/* Ajustes de texto */
+body.dark h1,
+body.dark p,
+body.dark a {
+    color: #fff; /* Texto blanco para encabezados y párrafos */
+}
+
+/* Estilos para el selector */
+:root {
+    --gray: #34495e;
+    --darkgray: #2c3e50;
+  }
+  
+  select {
+    /* Reset Select */
+    
+    appearance: none;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: var(--darkgray);
+    background-image: none;
+    cursor: pointer;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select wrapper */
+  .select {
+    position: relative;
+    display: inline-flex;
+    width: 20em;
+    height: 3em;
+    border-radius: .25em;
+    overflow: hidden;
+    margin-left: 1rem;
+  }
+  /* Arrow */
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background-color: #34495e;
+    transition: .25s all ease;
+    pointer-events: none;
+  }
+  /* Transition */
+  .select:hover::after {
+    color: #f39c12;
+  }

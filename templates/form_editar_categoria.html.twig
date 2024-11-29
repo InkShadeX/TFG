@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/form_editar_categoria.css') }}">
+    </head>
+    <body>
+    {% include 'header_footer.html.twig' %}
+        <div class="editar-categoria">
+            <h1 class="titulo-formulario">Editar Categoría: {{ categoria.nombreCategoria }}</h1>
+
+            <form action="{{ path('editar_categoria', {id: categoria.idCategoria}) }}" method="post" class="formulario-categoria">
+                <div class="form-group">
+                    <label for="nombre_categoria" class="label-form">Nombre:</label>
+                    <input type="text" id="nombre_categoria" name="nombre_categoria" value="{{ categoria.nombreCategoria }}" class="input-form" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion_categoria" class="label-form">Descripción:</label>
+                    <textarea id="descripcion_categoria" name="descripcion_categoria" class="input-form">{{ categoria.descripcionCategoria }}</textarea>
+                </div>
+
+                {# <div class="form-group">
+                    <label for="imagen_categoria" class="label-form">Imagen:</label>
+                    <input type="file" id="imagen_categoria" name="imagen_categoria" class="input-form">
+                    <small>Sube una imagen para la categoría.</small>
+                </div> #}
+
+                <button type="submit" class="btn-guardar">Guardar cambios</button>
+            </form>
+        </div>
+    </body>
+</html>
